@@ -1,31 +1,30 @@
-
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js", // main entry file
   output: {
-    filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
-    assetModuleFilename: 'assets/[hash][ext][query]',
-    publicPath: '',
-  },
-  mode: 'development',
-  devtool: 'source-map',
-  devServer: {
-    static: './dist',
-    open: true,
-    hot: true,
-    port: 5173
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
+    clean: true, // cleans old files from dist
   },
   module: {
     rules: [
-      { test: /\.css$/i, use: ['style-loader', 'css-loader'] },
-      { test: /\.(png|jpe?g|gif|svg)$/i, type: 'asset/resource' }
-    ]
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"], // allows CSS import
+      },
+    ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html' })
-  ]
+    new HtmlWebpackPlugin({
+      template: "./src/index.html", // base HTML
+    }),
+  ],
+  devServer: {
+    static: "./dist",
+    hot: true,
+    open: true, // auto-opens browser
+  },
+  mode: "development",
 };
